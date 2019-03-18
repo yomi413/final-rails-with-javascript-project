@@ -3,7 +3,12 @@ require 'pry'
 class CarsController < ApplicationController
   
   def index
-    @cars = Car.registered_owner
+    cars = Car.registered_owner
+
+    respond_to do |format|
+      format.html
+      format.json { render json: cars }
+    end
   end
 
   def new
