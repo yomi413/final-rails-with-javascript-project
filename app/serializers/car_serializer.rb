@@ -1,3 +1,3 @@
-class CarSerializer < ActiveModel::CarSerializer
-  attrtibutes :id, :make, :model, :year
+class CarSerializer < ActiveModel::Serializer
+  attributes :id, :make, :model, :year, :color, :size
 end
