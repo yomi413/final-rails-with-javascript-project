@@ -14,19 +14,47 @@
     </div>
   <% end %>
 
+<div id="new_car_form">
+
   <%= form_tag('/cars', method: "post") do %>
-    
+      
     <%= render 'form' %>
 
-    <%= fields_for :parking_space_attributes do |ps| %>
+      <%= fields_for :parking_space_attributes do |ps| %>
 
-      <strong><%= ps.label :space_number, "Parking Space Number:" %></strong>
+        <strong><%= ps.label :space_number, "Parking Space Number:" %></strong>
 
-      <%= ps.select :space_number, options_for_select((100..125).step(1).to_a.map{|space| ["#{space}", space]}), prompt: "Please choose your parking space" %>
+        <%= ps.select :space_number, options_for_select((100..125).step(1).to_a.map{|space| ["#{space}", space]}), prompt: "Please choose your parking space" %>
 
-    <% end %>
-      
-    <br></br>
+      <% end %>
+        
+      <br></br>
+    <div class="actions">
+      <%= submit_tag "Create Car" %>
+    </div>
 
-  <%= submit_tag "Create Car" %>
-<% end %>
+  <% end %>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <%= render "index" %>
+      </tr>
+    </thead>
+    <tbody>
+      <td id="new_parking"></td>
+      <td id="new_make"></td>
+      <td id="new_model"></td>
+      <td id="new_year"></td>
+      <td id="new_color"></td>
+      <td id="new_size"></td>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
