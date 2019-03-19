@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 
 class CarsController < ApplicationController
   
@@ -26,7 +26,12 @@ class CarsController < ApplicationController
   end
 
   def show
-    @car = current_user.cars.find_by(id: params[:id])
+    car = current_user.cars.find_by(id: params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: car }
+    end
   end
 
   def edit
