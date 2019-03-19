@@ -1,12 +1,6 @@
 <h2>Would you like to edit or delete this entry?</h2>
 
-<p><strong>Car:</strong> <%= @car.your_car %></p>
-
-<p><strong>Color:</strong> <%= @car.color %></p>
-
-<p><strong>Size:</strong> <%= @car.size %></p>
-
-<p><strong>Parking Space Number:</strong> <%= @car.parking_space.space_number %></p>
+<div id="car_info">
+</div>
 
 
-<%= link_to "Edit Car", edit_car_path(@car) %> | <%= link_to "Delete Car", @car, :method => :delete %>
