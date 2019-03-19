@@ -25,18 +25,8 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @cars.each do |car| %>
-        <tr>
-          <td><%= car.user.name %></td>
-           <td><%= car.parking_space.space_number %></td>
-          <td><%= car.make %></td>
-          <td><%= car.model %></td>
-          <td><%= car.year %></td>
-          <td><%= car.color %></td>
-          <td><%= car.size %></td>
-        </tr>
-      <% end %>
+    <tbody id="admin_cars">
+      
     </tbody>
   </table>
 
@@ -49,17 +39,8 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% current_user.cars.each do |car| %>
-        <tr>
-          <td><%= car.parking_space.space_number %></td>
-          <td><%= car.make %></td>
-          <td><%= car.model %></td>
-          <td><%= car.year %></td>
-          <td><%= car.color %></td>
-          <td><%= car.size %></td>
-        </tr>
-      <% end %>
+    <tbody id="user_cars">
+      
     </tbody>
   </table>
 
