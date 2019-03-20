@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', function() {
         $('#user_cars').append(carsHTML);
       }
     })
-  } else if (isNumeric(carsURL)) {
+  } else if (/cars\/\d+$/.test(carsURL)) {
     $.ajax ({
       type: 'GET',
       url: `${carsURL}.json`,
@@ -37,7 +37,6 @@ $(document).on('turbolinks:load', function() {
           <p><strong>Parking Space Number:</strong> ${car.parking_space.space_number}</p>`
 
         $('#cars').append(carInfo);
-
       }
     })
   } else if (carsURL === '/cars/new') {
@@ -58,9 +57,7 @@ $(document).on('turbolinks:load', function() {
       })
     })
   }
-  
 })
 
 
-// <%= link_to "Edit Car", edit_car_path(@car) %> | <%= link_to "Delete Car", @car, :method => :delete %>
 
