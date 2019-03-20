@@ -24,8 +24,20 @@ class CarsController < ApplicationController
     car = current_user.cars.build(car_params)
     
     respond_to do |format|
-      format.html
-      format.json { render json: car }
+      format.html {
+        if car.save
+          redirect_to cars_path
+        else
+          render 'new'
+        end
+      }
+      format.json { 
+        if car.save
+          render json: car, status: 201
+        else 
+          render json: car.errors, status: 422
+        end
+      }
     end
   end
 
