@@ -13,20 +13,25 @@ class CarsController < ApplicationController
 
   def new
     @car = Car.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @car }
+    end
   end
 
   def create
-    @car = current_user.cars.build(car_params)
+    car = current_user.cars.build(car_params)
     
-    if @car.save
-      redirect_to cars_path
-    else
-      render 'new'
+    respond_to do |format|
+      format.html
+      format.json { render json: car }
     end
   end
 
   def show
-    car = current_user.cars.find_by(id: params[:id])
+    # car = current_user.cars.find_by(id: params[:id])
+    car = Car.find(params[:id])
 
     respond_to do |format|
       format.html
