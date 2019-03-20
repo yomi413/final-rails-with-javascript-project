@@ -1,4 +1,6 @@
-
+function isNumeric(num) {
+  return !isNaN(num)
+}
 
 $(document).on('turbolinks:load', function() {
   const carsURL = window.location.pathname;
@@ -21,9 +23,8 @@ $(document).on('turbolinks:load', function() {
 
         $('#user_cars').append(carsHTML);
       }
-
     })
-  }
+  } else if (carsURL === '/cars')
   
 })
 
