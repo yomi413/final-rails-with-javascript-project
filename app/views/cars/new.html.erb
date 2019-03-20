@@ -55,22 +55,7 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-  $(function () {
-    $('form').submit(function(event) {
-      event.preventDefault();
-      const values = $(this).serialize();
-      const posting = $.post('/cars', values);
-      posting.done(function(data) {
-        const car = data;
-        $('#new_parking').text(`${car.parking_space.space_number}`);
-        $('new_make').text(`${car.make}`);
-        $('new_model').text(`${car.model}`);
-        $('new_year').text(`${car.year}`);
-        $('new_color').text(`${car.color}`);
-        $('new_size').text(`${car.size}`)
-      })
-    })
-  })
+  
 </script>
 
 
