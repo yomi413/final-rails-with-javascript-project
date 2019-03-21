@@ -67,7 +67,13 @@ $(document).on('turbolinks:load', function() {
           return `<li>${car.make} ${car.model} ${car.year}</li>`
         })
 
-        $('#car_list').append(carList)
+        const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
+          return `<li>${parkingSpace.space_number}</li>`
+        })
+
+        $('#car_list').append(carList);
+
+        $('#parking_space_list').append(parkingSpaceList);
       }
     })
 
