@@ -61,7 +61,8 @@ $(document).on('turbolinks:load', function() {
       type: 'GET',
       url: `${url}.json`,
       success: function(user) {
-        $('#user_name').append(`Welcome, ${user.name}!`)
+
+        const firstName = user.name.split(' ')[0];
 
         const carList = user.cars.map(function(car) {
           return `<li>${car.make} ${car.model} ${car.year}</li>`
@@ -70,6 +71,8 @@ $(document).on('turbolinks:load', function() {
         const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
           return `<li>${parkingSpace.space_number}</li>`
         })
+
+        $('#user_name').append(`Welcome, ${firstName}!`)
 
         $('#car_list').append(carList);
 
