@@ -3,11 +3,11 @@ function isNumeric(num) {
 }
 
 $(document).on('turbolinks:load', function() {
-  const carsURL = window.location.pathname;
-  if (carsURL === '/cars') {
+  const url = window.location.pathname;
+  if (url === '/cars') {
     $.ajax ({
       type: 'GET',
-      url: `${carsURL}.json`,
+      url: `${url}.json`,
       success: function(cars) {
 
         const carsHTML = cars.map(function(car) {
@@ -24,10 +24,10 @@ $(document).on('turbolinks:load', function() {
         $('#user_cars').append(carsHTML);
       }
     })
-  } else if (/cars\/\d+$/.test(carsURL)) {
+  } else if (/cars\/\d+$/.test(url)) {
     $.ajax ({
       type: 'GET',
-      url: `${carsURL}.json`,
+      url: `${url}.json`,
       success: function(car) {
 
         const carInfo = `
@@ -39,7 +39,7 @@ $(document).on('turbolinks:load', function() {
         $('#cars').append(carInfo);
       }
     })
-  } else if (carsURL === '/cars/new') {
+  } else if (url === '/cars/new') {
     $(function () {
       $('form').submit(function(event) {
         event.preventDefault();
@@ -56,6 +56,21 @@ $(document).on('turbolinks:load', function() {
         })
       })
     })
+  } else if (/users\/\d+$/.test(url)) {
+    $.ajax ({
+      type: 'GET',
+      url: `${url}.json`,
+      success: function(user) {
+        $('#user_name').append(`Welcome, ${user.name}!`)
+
+        const carList = user.cars.map(function(car) {
+          return `<li>${car.make} ${car.model} ${car.year}</li>`
+        })
+
+        $('#car_list').append(carList)
+      }
+    })
+
   }
 })
 
