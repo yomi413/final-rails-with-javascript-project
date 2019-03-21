@@ -65,7 +65,7 @@ $(document).on('turbolinks:load', function() {
         const firstName = user.name.split(' ')[0];
 
         const carList = user.cars.map(function(car) {
-          return `<li>${car.make} ${car.model} ${car.year}</li>`
+          return `<li><a href="#" class="user_cars">${car.make} ${car.model} ${car.year}</a></li>`
         })
 
         const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
