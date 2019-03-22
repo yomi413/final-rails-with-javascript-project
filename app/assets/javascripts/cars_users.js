@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function() {
         </tr>`
       })
 
-      $('#user_cars').append(carsHTML);
+      $('.user_cars').append(carsHTML);
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(car) {
@@ -35,11 +35,11 @@ $(document).on('turbolinks:load', function() {
         posting.done(function(data) {
           const car = data;
           $('#new_parking').text(`${car.parking_space.space_number}`);
-          $('new_make').text(`${car.make}`);
-          $('new_model').text(`${car.model}`);
-          $('new_year').text(`${car.year}`);
-          $('new_color').text(`${car.color}`);
-          $('new_size').text(`${car.size}`)
+          $('#new_make').text(`${car.make}`);
+          $('#new_model').text(`${car.model}`);
+          $('#new_year').text(`${car.year}`);
+          $('#new_color').text(`${car.color}`);
+          $('#new_size').text(`${car.size}`)
         })
       })
     })
