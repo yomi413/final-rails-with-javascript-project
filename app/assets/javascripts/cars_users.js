@@ -1,30 +1,36 @@
 $(document).on('turbolinks:load', function() {
   const url = window.location.pathname;
-  
+  // debugger
   if (url === '/cars') {
     $.get(`${url}.json`, function(cars) {
-      const carsHTML = cars.map(car => {
-        return `<tr>
-        <td>${car.parking_space.space_number}</td>
-        <td>${car.make}</td>
-        <td>${car.model}</td>
-        <td>${car.year}</td>
-        <td>${car.color}</td>
-        <td>${car.size}</td>
-        </tr>`
-      })
+      cars.map((car, user) => {
 
-      $('.user_cars').append(carsHTML);
+        const carsHTML = `
+          <td>${car.parking_space.space_number}</td>
+          <td>${car.make}</td>
+          <td>${car.model}</td>
+          <td>${car.year}</td>
+          <td>${car.color}</td>
+          <td>${car.size}</td>`
+        
+        if (!car.user.admin) {
+          $('#registered_cars').append('<tr>' 
+            + '<td>' + car.user.name + '</td>' 
+            + carsHTML + '</tr>')
+        } 
+
+        $('#user_cars').append('<tr>' + carsHTML + '</tr>')
+      })
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(car) {
       const carInfo = `
-        <p><strong>Car:</strong> ${car.make} ${car.model} ${car.year}</p>
-        <p><strong>Color:</strong> ${car.color}</p>
-        <p><strong>Size:</strong> ${car.size}</p>
-        <p><strong>Parking Space Number:</strong> ${car.parking_space.space_number}</p>`
+      <p><strong>Car:</strong> ${car.make} ${car.model} ${car.year}</p>
+      <p><strong>Color:</strong> ${car.color}</p>
+      <p><strong>Size:</strong> ${car.size}</p>
+      <p><strong>Parking Space Number:</strong> ${car.parking_space.space_number}</p>`
 
-        $('#cars').append(carInfo);
+      $('#cars').append(carInfo);
     })
   } else if (url === '/cars/new') {
     $(function () {
