@@ -5,22 +5,12 @@ $(document).on('turbolinks:load', function() {
     $.get(`${url}.json`, function(cars) {
       cars.map((carJSON, user) => {
         const car = new Car(carJSON);
-// debugger
-        const carsHTML = car.toHTML();
 
-        // const carsHTML = `
-        //   <td>${car.parking_space.space_number}</td>
-        //   <td>${car.make}</td>
-        //   <td>${car.model}</td>
-        //   <td>${car.year}</td>
-        //   <td>${car.color}</td>
-        //   <td>${car.size}</td>`
+        const carsHTML = car.toHTML();
         
-        // if (!car.user.admin) {
-        //   $('#registered_cars').append('<tr>' 
-        //     + '<td>' + car.user.name + '</td>' 
-        //     + carsHTML + '</tr>')
-        // } 
+        if (!car.user.admin) {
+          car.registeredCarsHTML();
+        } 
 
         $('#user_cars').append(`<tr>${carsHTML}</tr>`)
       })
@@ -73,7 +63,7 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-
+// debugger
 class Car {
   constructor(carJSON) {
     this.carJSON = carJSON;
@@ -87,6 +77,18 @@ class Car {
     <td>${this.carJSON.color}</td>
     <td>${this.carJSON.size}</td>`
   }
+
+  get user() {
+    return this.carJSON.user
+  }
+
+  registeredCarsHTML() {
+    return $('#registered_cars').append(`<tr>
+    <td>${this.carJSON.user.name}</td> 
+    ${this.toHTML()}</tr>`)
+  }
+
+
 }
 
 
