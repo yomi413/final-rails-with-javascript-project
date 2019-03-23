@@ -1,25 +1,28 @@
 $(document).on('turbolinks:load', function() {
   const url = window.location.pathname;
-  // debugger
+  
   if (url === '/cars') {
     $.get(`${url}.json`, function(cars) {
-      cars.map((car, user) => {
+      cars.map((carJSON, user) => {
+        const car = new Car(carJSON);
+// debugger
+        const carsHTML = car.toHTML();
 
-        const carsHTML = `
-          <td>${car.parking_space.space_number}</td>
-          <td>${car.make}</td>
-          <td>${car.model}</td>
-          <td>${car.year}</td>
-          <td>${car.color}</td>
-          <td>${car.size}</td>`
+        // const carsHTML = `
+        //   <td>${car.parking_space.space_number}</td>
+        //   <td>${car.make}</td>
+        //   <td>${car.model}</td>
+        //   <td>${car.year}</td>
+        //   <td>${car.color}</td>
+        //   <td>${car.size}</td>`
         
-        if (!car.user.admin) {
-          $('#registered_cars').append('<tr>' 
-            + '<td>' + car.user.name + '</td>' 
-            + carsHTML + '</tr>')
-        } 
+        // if (!car.user.admin) {
+        //   $('#registered_cars').append('<tr>' 
+        //     + '<td>' + car.user.name + '</td>' 
+        //     + carsHTML + '</tr>')
+        // } 
 
-        $('#user_cars').append('<tr>' + carsHTML + '</tr>')
+        $('#user_cars').append(`<tr>${carsHTML}</tr>`)
       })
     })
   } else if (/cars\/\d+$/.test(url)) {
@@ -69,6 +72,22 @@ $(document).on('turbolinks:load', function() {
     })
   }
 })
+
+
+class Car {
+  constructor(carJSON) {
+    this.carJSON = carJSON;
+  }
+
+  toHTML() {
+    return `<td>${this.carJSON.parking_space.space_number}</td>
+    <td>${this.carJSON.make}</td>
+    <td>${this.carJSON.model}</td>
+    <td>${this.carJSON.year}</td>
+    <td>${this.carJSON.color}</td>
+    <td>${this.carJSON.size}</td>`
+  }
+}
 
 
 
