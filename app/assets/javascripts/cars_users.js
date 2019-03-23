@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', function() {
           car.registeredCarsHTML();
         } 
 
-        $('#user_cars').append(`<tr>${carsHTML}</tr>`)
+        car.userCarsHTML();
       })
     })
   } else if (/cars\/\d+$/.test(url)) {
@@ -63,7 +63,7 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-// debugger
+
 class Car {
   constructor(carJSON) {
     this.carJSON = carJSON;
@@ -86,6 +86,10 @@ class Car {
     return $('#registered_cars').append(`<tr>
     <td>${this.carJSON.user.name}</td> 
     ${this.toHTML()}</tr>`)
+  }
+
+  userCarsHTML() {
+    return $('#user_cars').append(`<tr>${this.toHTML()}</tr>`)
   }
 
 
