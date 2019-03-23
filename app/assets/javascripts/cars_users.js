@@ -9,21 +9,19 @@ $(document).on('turbolinks:load', function() {
         const carsHTML = car.toHTML();
         
         if (!car.user.admin) {
-          car.registeredCarsHTML();
+          car.registeredCars();
         } 
 
-        car.userCarsHTML();
+        car.userCars();
       })
     })
   } else if (/cars\/\d+$/.test(url)) {
-    $.get(`${url}.json`, function(car) {
-      const carInfo = `
-      <p><strong>Car:</strong> ${car.make} ${car.model} ${car.year}</p>
-      <p><strong>Color:</strong> ${car.color}</p>
-      <p><strong>Size:</strong> ${car.size}</p>
-      <p><strong>Parking Space Number:</strong> ${car.parking_space.space_number}</p>`
+    $.get(`${url}.json`, function(showCar) {
+      const car = new Car(showCar);
 
-      $('#cars').append(carInfo);
+      const carInfo = car.showCarHTML();
+
+      car.showCars();
     })
   } else if (url === '/cars/new') {
     $(function () {
@@ -82,14 +80,25 @@ class Car {
     return this.carJSON.user
   }
 
-  registeredCarsHTML() {
+  registeredCars() {
     return $('#registered_cars').append(`<tr>
     <td>${this.carJSON.user.name}</td> 
     ${this.toHTML()}</tr>`)
   }
 
-  userCarsHTML() {
+  userCars() {
     return $('#user_cars').append(`<tr>${this.toHTML()}</tr>`)
+  }
+
+  showCarHTML() {
+    return `<p><strong>Car:</strong> ${this.carJSON.make} ${this.carJSON.model} ${this.carJSON.year}</p>
+    <p><strong>Color:</strong> ${this.carJSON.color}</p>
+    <p><strong>Size:</strong> ${this.carJSON.size}</p>
+    <p><strong>Parking Space Number:</strong> ${this.carJSON.parking_space.space_number}</p>`
+  }
+
+  showCars() {
+    return $('#cars').append(`${this.showCarHTML()}`);
   }
 
 
