@@ -34,22 +34,24 @@ $(document).on('turbolinks:load', function() {
       })
     })
   } else if (/users\/\d+$/.test(url)) {
-    $.get(`${url}.json`, function(user) {
-      const firstName = user.name.split(' ')[0];
+    $.get(`${url}.json`, function(userJSON) {
+      const user = new User(userJSON);
 
-      const carList = user.cars.map(function(car) {
-        return `<li><a href='#'>${car.make} ${car.model} ${car.year}</a></li>`
-      })
+      // const firstName = user.name.split(' ')[0];
+      console.log(user.firstName())
+      // const carList = user.cars.map(function(car) {
+      //   return `<li><a href='#'>${car.make} ${car.model} ${car.year}</a></li>`
+      // })
 
-      const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
-        return `<li>${parkingSpace.space_number}</li>`
-      })
+      // const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
+      //   return `<li>${parkingSpace.space_number}</li>`
+      // })
 
-      $('#user_name').append(`Welcome, ${firstName}!`)
+      // $('#user_name').append(`Welcome, ${firstName}!`)
 
-      $('#car_list').html(carList);
+      // $('#car_list').html(carList);
 
-      $('#parking_space_list').append(parkingSpaceList);
+      // $('#parking_space_list').append(parkingSpaceList);
     })
   }
 })
@@ -101,6 +103,16 @@ class Car {
     $('#new_year').text(`${this.carJSON.year}`)
     $('#new_color').text(`${this.carJSON.color}`)
     $('#new_size').text(`${this.carJSON.size}`)
+  }
+}
+
+class User {
+  constructor(userJSON) {
+    this.userJSON = userJSON;
+  }
+
+  firstName() {
+    return this.userJSON.name.split(' ')[0]
   }
 }
 
