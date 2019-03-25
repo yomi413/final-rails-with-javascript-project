@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
   
   if (url === '/cars') {
     $.get(`${url}.json`, function(cars) {
-      cars.map((carJSON, user) => {
+      cars.map((carJSON) => {
         const car = new Car(carJSON);
 
         const carsHTML = car.toHTML();
@@ -24,20 +24,18 @@ $(document).on('turbolinks:load', function() {
       car.showCars();
     })
   } else if (url === '/cars/new') {
-    $(function () {
-      $('form').submit(function(event) {
-        event.preventDefault();
-        const values = $(this).serialize();
-        const posting = $.post('/cars.json', values);
-        posting.done(function(data) {
-          const car = data;
-          $('#new_parking').text(`${car.parking_space.space_number}`);
-          $('#new_make').text(`${car.make}`);
-          $('#new_model').text(`${car.model}`);
-          $('#new_year').text(`${car.year}`);
-          $('#new_color').text(`${car.color}`);
-          $('#new_size').text(`${car.size}`)
-        })
+    $('form').submit(function(event) {
+      event.preventDefault();
+      const values = $(this).serialize();
+      const posting = $.post('/cars.json', values);
+      posting.done(function(data) {
+        const car = data;
+        $('#new_parking').text(`${car.parking_space.space_number}`);
+        $('#new_make').text(`${car.make}`);
+        $('#new_model').text(`${car.model}`);
+        $('#new_year').text(`${car.year}`);
+        $('#new_color').text(`${car.color}`);
+        $('#new_size').text(`${car.size}`)
       })
     })
   } else if (/users\/\d+$/.test(url)) {
@@ -45,7 +43,7 @@ $(document).on('turbolinks:load', function() {
       const firstName = user.name.split(' ')[0];
 
       const carList = user.cars.map(function(car) {
-        return `<li><a href='#' class="user_cars">${car.make} ${car.model} ${car.year}</a></li>`
+        return `<li><a href='#'>${car.make} ${car.model} ${car.year}</a></li>`
       })
 
       const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
@@ -54,7 +52,7 @@ $(document).on('turbolinks:load', function() {
 
       $('#user_name').append(`Welcome, ${firstName}!`)
 
-      $('#car_list').append(carList);
+      $('#car_list').html(carList);
 
       $('#parking_space_list').append(parkingSpaceList);
     })
