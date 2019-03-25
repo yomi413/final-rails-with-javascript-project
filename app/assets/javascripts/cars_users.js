@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
-  const url = window.location.pathname;
-  
+  const url = window.location.pathname
+
   if (url === '/cars') {
     $.get(`${url}.json`, function(cars) {
       cars.map((carJSON) => {
@@ -21,21 +21,16 @@ $(document).on('turbolinks:load', function() {
 
       const carInfo = car.showCarHTML();
 
-      car.showCars();
+      return car.showCars();
     })
   } else if (url === '/cars/new') {
     $('form').submit(function(event) {
       event.preventDefault();
       const values = $(this).serialize();
       const posting = $.post('/cars.json', values);
-      posting.done(function(data) {
-        const car = data;
-        $('#new_parking').text(`${car.parking_space.space_number}`);
-        $('#new_make').text(`${car.make}`);
-        $('#new_model').text(`${car.model}`);
-        $('#new_year').text(`${car.year}`);
-        $('#new_color').text(`${car.color}`);
-        $('#new_size').text(`${car.size}`)
+      posting.done(function(carData) {
+        const car = new Car(carData);
+        return car.newCar();
       })
     })
   } else if (/users\/\d+$/.test(url)) {
@@ -75,7 +70,7 @@ class Car {
   }
 
   get user() {
-    return this.carJSON.user
+    return this.carJSON.user;
   }
 
   registeredCars() {
@@ -99,7 +94,14 @@ class Car {
     return $('#cars').append(`${this.showCarHTML()}`);
   }
 
-
+  newCar() {
+    $('#new_parking').text(`${this.carJSON.parking_space.space_number}`)
+    $('#new_make').text(`${this.carJSON.make}`)
+    $('#new_model').text(`${this.carJSON.model}`)
+    $('#new_year').text(`${this.carJSON.year}`)
+    $('#new_color').text(`${this.carJSON.color}`)
+    $('#new_size').text(`${this.carJSON.size}`)
+  }
 }
 
 
