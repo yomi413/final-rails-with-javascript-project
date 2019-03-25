@@ -17,11 +17,16 @@ $(document).on('turbolinks:load', function() {
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(showCar) {
-      const car = new Car(showCar);
+      
+      console.log(showCar)
 
-      const carInfo = car.showCarHTML();
+      const singleCar = 
+      `<p><strong>Car:</strong> ${showCar.make} ${showCar.model} ${showCar.year}</p>
+      <p><strong>Color:</strong> ${showCar.color}</p>
+      <p><strong>Size:</strong> ${showCar.size}</p>
+      <p><strong>Parking Space Number:</strong> ${showCar.parking_space.space_number}</p>`
 
-      return car.showCars();
+      $('#cars').append(singleCar)
     })
   } else if (url === '/cars/new') {
     $('form').submit(function(event) {
@@ -37,19 +42,20 @@ $(document).on('turbolinks:load', function() {
     $.get(`${url}.json`, function(userJSON) {
       const user = new User(userJSON);
 
-      // const firstName = user.name.split(' ')[0];
-      console.log(user.firstName())
-      // const carList = user.cars.map(function(car) {
-      //   return `<li><a href='#'>${car.make} ${car.model} ${car.year}</a></li>`
-      // })
+      let carId = 1;
 
+      const carList = user.cars().map(function(car) {
+        return `<li><a href='/cars/${carId++}'>${car.make} ${car.model} ${car.year}</a></li>`
+      })
+
+      // console.log(carList)
       // const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
       //   return `<li>${parkingSpace.space_number}</li>`
       // })
 
-      // $('#user_name').append(`Welcome, ${firstName}!`)
+      $('#user_name').append(`Welcome, ${user.firstName()}!`)
 
-      // $('#car_list').html(carList);
+      $('#car_list').html(carList);
 
       // $('#parking_space_list').append(parkingSpaceList);
     })
@@ -62,6 +68,14 @@ class Car {
     this.carJSON = carJSON;
   }
 
+  get user() {
+    return this.carJSON.user;
+  }
+
+  get parkingSpace() {
+    return this.carJSON.parking_space;
+  }
+
   toHTML() {
     return `<td>${this.carJSON.parking_space.space_number}</td>
     <td>${this.carJSON.make}</td>
@@ -69,10 +83,6 @@ class Car {
     <td>${this.carJSON.year}</td>
     <td>${this.carJSON.color}</td>
     <td>${this.carJSON.size}</td>`
-  }
-
-  get user() {
-    return this.carJSON.user;
   }
 
   registeredCars() {
@@ -85,16 +95,16 @@ class Car {
     return $('#user_cars').append(`<tr>${this.toHTML()}</tr>`)
   }
 
-  showCarHTML() {
-    return `<p><strong>Car:</strong> ${this.carJSON.make} ${this.carJSON.model} ${this.carJSON.year}</p>
-    <p><strong>Color:</strong> ${this.carJSON.color}</p>
-    <p><strong>Size:</strong> ${this.carJSON.size}</p>
-    <p><strong>Parking Space Number:</strong> ${this.carJSON.parking_space.space_number}</p>`
-  }
+  // showCarHTML() {
+  //   `<p><strong>Car:</strong> ${this.carJSON.make} ${this.carJSON.model} ${this.carJSON.year}</p>
+  //   <p><strong>Color:</strong> ${this.carJSON.color}</p>
+  //   <p><strong>Size:</strong> ${this.carJSON.size}</p>
+  //   <p><strong>Parking Space Number:</strong> ${this.carJSON.parking_space.space_number}</p>`
+  // }
 
-  showCars() {
-    return $('#cars').append(`${this.showCarHTML()}`);
-  }
+  // showCars() {
+  //   return $('#cars').append(`${this.showCarHTML()}`);
+  // }
 
   newCar() {
     $('#new_parking').text(`${this.carJSON.parking_space.space_number}`)
@@ -114,6 +124,19 @@ class User {
   firstName() {
     return this.userJSON.name.split(' ')[0]
   }
+
+  cars() {
+    const cars = this.userJSON.cars;
+    return cars;
+  }
+
+  // carList() {
+  //   this.userJSON
+
+  // //   map(function(car) {
+  // //     return `<li><a href='/cars/show'>${car.make} ${car.model} ${car.year}</a></li>`
+  // //   })
+  // }
 }
 
 
