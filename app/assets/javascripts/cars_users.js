@@ -17,14 +17,14 @@ $(document).on('turbolinks:load', function() {
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(showCar) {
-
+      
       const singleCar = 
       `<p><strong>Car:</strong> ${showCar.make} ${showCar.model} ${showCar.year}</p>
       <p><strong>Color:</strong> ${showCar.color}</p>
       <p><strong>Size:</strong> ${showCar.size}</p>
       <p><strong>Parking Space Number:</strong> ${showCar.parking_space.space_number}</p>`
 
-      $('#cars').append(singleCar);
+      return $('#cars').append(singleCar);  
     })
   } else if (url === '/cars/new') {
     $('form').submit(function(event) {
@@ -57,10 +57,6 @@ class Car {
 
   get user() {
     return this.carJSON.user;
-  }
-
-  get parkingSpace() {
-    return this.carJSON.parking_space;
   }
 
   toHTML() {
