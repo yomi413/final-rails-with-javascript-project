@@ -17,8 +17,6 @@ $(document).on('turbolinks:load', function() {
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(showCar) {
-      
-      console.log(showCar)
 
       const singleCar = 
       `<p><strong>Car:</strong> ${showCar.make} ${showCar.model} ${showCar.year}</p>
@@ -26,7 +24,7 @@ $(document).on('turbolinks:load', function() {
       <p><strong>Size:</strong> ${showCar.size}</p>
       <p><strong>Parking Space Number:</strong> ${showCar.parking_space.space_number}</p>`
 
-      $('#cars').append(singleCar)
+      $('#cars').append(singleCar);
     })
   } else if (url === '/cars/new') {
     $('form').submit(function(event) {
@@ -94,17 +92,6 @@ class Car {
   userCars() {
     return $('#user_cars').append(`<tr>${this.toHTML()}</tr>`)
   }
-
-  // showCarHTML() {
-  //   `<p><strong>Car:</strong> ${this.carJSON.make} ${this.carJSON.model} ${this.carJSON.year}</p>
-  //   <p><strong>Color:</strong> ${this.carJSON.color}</p>
-  //   <p><strong>Size:</strong> ${this.carJSON.size}</p>
-  //   <p><strong>Parking Space Number:</strong> ${this.carJSON.parking_space.space_number}</p>`
-  // }
-
-  // showCars() {
-  //   return $('#cars').append(`${this.showCarHTML()}`);
-  // }
 
   newCar() {
     $('#new_parking').text(`${this.carJSON.parking_space.space_number}`)
