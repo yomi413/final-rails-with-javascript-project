@@ -40,22 +40,11 @@ $(document).on('turbolinks:load', function() {
     $.get(`${url}.json`, function(userJSON) {
       const user = new User(userJSON);
 
-      let carId = 1;
+      user.userName();
 
-      const carList = user.cars().map(function(car) {
-        return `<li><a href='/cars/${carId++}'>${car.make} ${car.model} ${car.year}</a></li>`
-      })
+      user.carList();
 
-      // console.log(carList)
-      // const parkingSpaceList = user.parking_spaces.map(function(parkingSpace) {
-      //   return `<li>${parkingSpace.space_number}</li>`
-      // })
-
-      $('#user_name').append(`Welcome, ${user.firstName()}!`)
-
-      $('#car_list').html(carList);
-
-      // $('#parking_space_list').append(parkingSpaceList);
+      user.parkingSpaceList();
     })
   }
 })
@@ -101,6 +90,7 @@ class Car {
     $('#new_color').text(`${this.carJSON.color}`)
     $('#new_size').text(`${this.carJSON.size}`)
   }
+
 }
 
 class User {
@@ -112,18 +102,35 @@ class User {
     return this.userJSON.name.split(' ')[0]
   }
 
-  cars() {
+  get cars() {
     const cars = this.userJSON.cars;
     return cars;
   }
 
-  // carList() {
-  //   this.userJSON
+  get parkingSpaces() {
+    return this.userJSON.parking_spaces;
+  }
 
-  // //   map(function(car) {
-  // //     return `<li><a href='/cars/show'>${car.make} ${car.model} ${car.year}</a></li>`
-  // //   })
-  // }
+  userName() {
+    return $('#user_name').append(`Welcome, ${this.firstName()}!`)
+  }
+
+  carList() {
+    const cars = this.cars.map(function(car) {
+        return `<li><a href='/cars/${car.id}'>${car.make} ${car.model} ${car.year}</a></li>`
+      })
+    return $('#car_list').html(cars);
+  }
+
+  parkingSpaceList() {
+    const parkingSpaces = this.parkingSpaces.map(function(parkingSpace) {
+      return `<li>${parkingSpace.space_number}</li>`
+    })
+    return $('#parking_space_list').append(parkingSpaces);
+  }
+
+
+
 }
 
 
