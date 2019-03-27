@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  const url = window.location.pathname
+  const url = window.location.pathname;
 
   if (url === '/cars') {
     $.get(`${url}.json`, function(cars) {
@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
     $.get(`${url}.json`, function(showCar) {
       
       const singleCar = 
-      `<p><strong>Car:</strong> ${showCar.make} ${showCar.model} ${showCar.year}</p>
+      `<p><strong>Car:</strong> ${showCar.make} ${showCar.model} (${showCar.year})</p>
       <p><strong>Color:</strong> ${showCar.color}</p>
       <p><strong>Size:</strong> ${showCar.size}</p>
       <p><strong>Parking Space Number:</strong> ${showCar.parking_space.space_number}</p>`

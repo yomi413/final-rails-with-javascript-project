@@ -42,7 +42,7 @@ class User {
   }
 
   firstName() {
-    return this.userJSON.name.split(' ')[0]
+    return this.userJSON.name.split(' ')[0];
   }
 
   get cars() {
@@ -55,19 +55,19 @@ class User {
   }
 
   userName() {
-    return $('#user_name').append(`Welcome, ${this.firstName()}!`)
+    return $('#user_name').append(`Welcome, ${this.firstName()}!`);
   }
 
   carList() {
     const cars = this.cars.map(function(car) {
-        return `<li><a href='/cars/${car.id}'>${car.make} ${car.model} ${car.year}</a></li>`
+        return `<li><a href='/cars/${car.id}'>${car.make} ${car.model} (${car.year})</a></li>`;
       })
     return $('#car_list').html(cars);
   }
 
   parkingSpaceList() {
     const parkingSpaces = this.parkingSpaces.map(function(parkingSpace) {
-      return `<li>${parkingSpace.space_number}</li>`
+      return `<li>${parkingSpace.space_number}</li>`;
     })
     return $('#parking_space_list').append(parkingSpaces);
   }
