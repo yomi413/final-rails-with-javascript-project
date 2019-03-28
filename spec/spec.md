@@ -1,40 +1,18 @@
-# Rails App with JavaScript Frontend Spec
-## Project Specs:
+# Specifications for the Rails with jQuery Assessment
 
-[ ] Must have a Rails Backend and new requirements implemented through JavaScript.
+Specs:
 
-[ ] Makes use of ES6 features as much as possible (e.g Arrow functions, Let & Const, Constructor Functions)
+ [X] Use jQuery for implementing new requirements
+ [X] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+ [X] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
+ [X] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+ [X] Use your Rails API and a form to create a resource and render the response without a page refresh.
+ [X] Translate JSON responses into js model objects.
+ [X] At least one of the js model objects must have at least one method added by your code to the prototype.
 
-[ ] Must translate the JSON responses into Javascript Model Objects using either ES6 class or constructor syntax. 
+Confirm:
 
-[ ] Must render at least one index page (index resource - 'list of things') via JavaScript and an Active Model Serialization JSON Backend.
-
-[ ] Must render at least one show page (show resource - 'one specific thing') via JavaScript and an Active Model Serialization JSON Backend.
-
-[ ] Your Rails application must reveal at least one `has-many` relationship through JSON that is then rendered to the page.
-
-[ ] Must use your Rails application to render a form for creating a resource that is submitted dynamically through JavaScript.
-
-[ ] At least one of the JS Model Objects must have a method on the prototype.
-
-# Project Repo Specs:
-
-## Read Me file contains:
-
-[ ] Application Description
-
-[ ] Installation guide (e.g. fork and clone repo, migrate db, bundle install, etc)
-
-[ ] Contributors guide (e.g. file an issue, file an issue with a pull request, etc)
-
-[ ] Licensing statement at the bottom (e.g. This project has been licensed under the MIT open source license.)
-
-## Repo General:
-
-[ ] You have a large number of small Git commits
-
-[ ] Your commit messages are meaningful
-
-[ ] You made the changes in a commit that relate to the commit message
-
-[ ] You don't include changes in a commit that aren't related to the commit message
+ [X] You have a large number of small Git commits
+ [X] Your commit messages are meaningful
+ [X] You made the changes in a commit that relate to the commit message
+ [X] You don't include changes in a commit that aren't related to the commit message
