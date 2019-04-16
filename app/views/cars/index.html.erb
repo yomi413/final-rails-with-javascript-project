@@ -16,7 +16,7 @@
 <h1>All Cars</h1>
 
 <% if current_user.admin %>
-  
+
   <table>
     <thead>
       <tr>
@@ -26,7 +26,7 @@
     </thead>
 
     <tbody id="registered_cars">
-      
+
     </tbody>
   </table>
 
@@ -40,8 +40,12 @@
     </thead>
 
     <tbody id="user_cars">
-      
+
     </tbody>
   </table>
 
 <% end %>
+
+<br />
+
+<button id="sorted_cars">Sort Cars</button>
