@@ -17,8 +17,8 @@ class Car {
   }
 
   registeredCars() {
-    return $('#registered_cars').append(`<tr>
-    <td>${this.carJSON.user.name}</td> 
+    return $('#car_list').append(`<tr>
+    <td>${this.carJSON.user.name}</td>
     ${this.toHTML()}</tr>`)
   }
 
@@ -62,7 +62,7 @@ class User {
     const cars = this.cars.map(function(car) {
         return `<li><a href='/cars/${car.id}'>${car.make} ${car.model} (${car.year})</a></li>`;
       })
-    return $('#car_list').html(cars);
+    return $('#car_list').append(cars);
   }
 
   parkingSpaceList() {
