@@ -6,15 +6,11 @@ $(document).on('turbolinks:load', function() {
       cars.map((carJSON) => {
         const car = new Car(carJSON);
 
-        // const carsHTML = car.toHTML();
-
         if (!car.user.admin) {
           car.registeredCars();
         }
-
         car.userCars();
       })
-      // console.log(car)
     })
   } else if (/cars\/\d+$/.test(url)) {
     $.get(`${url}.json`, function(showCar) {
@@ -50,7 +46,6 @@ $(document).on('turbolinks:load', function() {
   }
   $('#sorted_cars').click(function() {
     $.get(`${url}.json`, function(cars) {
-
       const sortedCars = cars.sort(function(firstCar, secondCar) {
         let x = firstCar.make.toLowerCase();
         let y = secondCar.make.toLowerCase();
