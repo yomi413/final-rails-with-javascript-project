@@ -1,7 +1,7 @@
 # require 'pry'
 
 class CarsController < ApplicationController
-  
+
   def index
     cars = Car.registered_owner
 
@@ -22,7 +22,7 @@ class CarsController < ApplicationController
 
   def create
     car = current_user.cars.build(car_params)
-    
+
     respond_to do |format|
       format.html {
         if car.save
@@ -31,10 +31,10 @@ class CarsController < ApplicationController
           render 'new'
         end
       }
-      format.json { 
+      format.json {
         if car.save
           render json: car, status: 201
-        else 
+        else
           render json: car.errors, status: 422
         end
       }
@@ -64,7 +64,7 @@ class CarsController < ApplicationController
     @car = current_user.cars.find_by(id: params[:id])
 
     if @car && logged_in?
-      @car.destroy 
+      @car.destroy
       redirect_to cars_path
     end
   end
@@ -73,11 +73,11 @@ class CarsController < ApplicationController
 
   def car_params
     params.permit(
-      :make, 
-      :model, 
-      :year, 
-      :color, 
-      :size, 
+      :make,
+      :model,
+      :year,
+      :color,
+      :size,
       parking_space_attributes: [
         :space_number
       ]
