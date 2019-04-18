@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
   const url = window.location.pathname;
 
   if (url === '/cars') {
@@ -44,6 +44,7 @@ $(document).on('turbolinks:load', function() {
       user.parkingSpaceList();
     })
   }
+
   $('#sorted_cars').click(function() {
     $.get(`${url}.json`, function(cars) {
       const sortedCars = cars.sort(function(firstCar, secondCar) {
