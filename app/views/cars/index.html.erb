@@ -16,7 +16,7 @@
 <h1>All Cars</h1>
 
 <% if current_user.admin %>
-  
+
   <table>
     <thead>
       <tr>
@@ -25,18 +25,8 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @cars.each do |car| %>
-        <tr>
-          <td><%= car.user.name %></td>
-           <td><%= car.parking_space.space_number %></td>
-          <td><%= car.make %></td>
-          <td><%= car.model %></td>
-          <td><%= car.year %></td>
-          <td><%= car.color %></td>
-          <td><%= car.size %></td>
-        </tr>
-      <% end %>
+    <tbody id="registered_cars">
+
     </tbody>
   </table>
 
@@ -49,18 +39,13 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% current_user.cars.each do |car| %>
-        <tr>
-          <td><%= car.parking_space.space_number %></td>
-          <td><%= car.make %></td>
-          <td><%= car.model %></td>
-          <td><%= car.year %></td>
-          <td><%= car.color %></td>
-          <td><%= car.size %></td>
-        </tr>
-      <% end %>
+    <tbody id="user_cars">
+
     </tbody>
   </table>
 
 <% end %>
+
+<br />
+
+<button id="sorted_cars">Sort Cars</button>

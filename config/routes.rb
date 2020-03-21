@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resources :cars, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
-  resources :users do
-    resources :cars, only: [:new, :index, :show]
-  end
+  # resources :users do
+  #   resources :cars, only: [:new, :index, :show]
+  # end
 
   root "welcome#home"
 

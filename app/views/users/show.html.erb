@@ -1,4 +1,4 @@
-<h1>Welcome, <%= @user.first_name %>!</h1>
+<h1 id="user_name"></h1>
 <% if @user.admin %>
   <h2>ADMIN</h2>
   <%= link_to "All Registered Cars", cars_path %>
@@ -10,26 +10,22 @@
     <p>Please click the link that you would like to edit or delete.</p>
   <% end %>
 
+<div id="user_registered_cars">
   <p>Number of Registered Cars: <%= @user.cars.count %></p>
 
-    <ul>
-      <% current_user.cars.each do |car| %>
-        <li>
-          <%= link_to car.your_car, user_car_path(current_user, car) %>
-        </li><br>
-      <% end %>
-    </ul>
+  <ul id="car_list">
 
-  <p>Number of Parking Spaces: <%= @user.parking_spaces.count %>
+  </ul>
+</div>
 
-    <ul>
-      <% current_user.parking_spaces.each do |ps| %>
-        <li>
-          <%= ps.space_number %>
-        </li>
-      <% end %>
-    </ul>
+<div id="user_registered_parking_spaces">
+  <p>Number of Parking Spaces: <%= @user.parking_spaces.count %></p>
 
-  <%= link_to "All Registered Cars", cars_path %> | <%= link_to "New Car", new_user_car_path(@user) %>
+  <ul id="parking_space_list">
+
+  </ul>
+</div>
+
+  <%= link_to "All Registered Cars", cars_path %> | <%= link_to "New Car", new_car_path %>
 
 <% end %>
