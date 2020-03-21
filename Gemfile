@@ -66,3 +66,5 @@ gem 'omniauth'
 gem 'omniauth-google'
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
+
+gem "actionview", ">= 5.2.4.2"
